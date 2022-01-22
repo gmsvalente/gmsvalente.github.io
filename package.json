@@ -1,0 +1,27 @@
+{
+  "name": "gmsvalente.github.io",
+  "version": "1.0.0",
+  "description": "My github.io page",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gmsvalente/gmsvalente.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gmsvalente/gmsvalente.github.io/issues"
+  },
+  "homepage": "https://github.com/gmsvalente/gmsvalente.github.io#readme",
+  "devDependencies": {
+    "shadow-cljs": "^2.16.12"
+  },
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  }
+}

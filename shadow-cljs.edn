@@ -1,0 +1,14 @@
+{:source-paths ["src"]
+
+ :dependencies [[re-frame "1.3.0-rc2" :exclusions [reagent]]
+                [reagent "1.1.0" :exclusions [cljsjs/react cljsjs/react-dom]]]
+
+ :nrepl {:middleware [refactor-nrepl.middleware/wrap-refactor]}
+
+ :dev-http {3000 "public"}
+
+ :builds
+ {:web {:target :browser
+        :output-dir "public/js"
+        :asset-path "/js"
+        :modules {:main {:init-fn site.core/launch}}}}}
