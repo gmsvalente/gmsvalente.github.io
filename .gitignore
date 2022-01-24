@@ -1,4 +1,4 @@
 .backups~/
 .shadow-cljs/
 node_modules/
-public/js/
+public/js/cljs-runtime/
