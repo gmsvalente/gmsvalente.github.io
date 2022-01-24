@@ -7,8 +7,8 @@
 
 (defn header-page* [{:keys [class-name]}]
   [app-bar {:class class-name
-            :position "stick"}
+            :position "sticky"}
    [toolbar {:class (:app-bar classes)}
-    [typography {:class (:header-title classes)} "My GitPage"]]])
+    [typography {:class (:header-title classes)} "GV's space"]]])
 
 (def header-page (styles/styled header-page* custom-styles))

@@ -6,18 +6,17 @@
    :header-title (->prefix "-header-title")
    :menu-btn (->prefix "-menu-btn")
    :content (->prefix "-content")
-   :app-bar (->prefix "-app-bar")})
+   :content-paper (->prefix "-content-paper")})
 
 (defn custom-styles [{:keys [theme]}]
-  (let [result {}
+  (let [styles {}
         spc (:spacing theme)
         ->& (partial ->& classes)]
-    (-> result 
-        (->& :root {:margin 0})
-        (->& :app-bar {:position "relative"})
+    (-> styles 
+        (->& :root {:margin "10px"})
         (->& :menu-btn {:color "inherit"})
-        (->& :header-title {:letter-spacing (spc 2)
-                            :font-family "Orbitron"
-                            "&:hover" {:letter-spacing (spc 1)}})
-        (->& :content {:background-color "cyan"
-                       :margin-top "44px"}))))
+        (->& :header-title {:font-family "Orbitron"})
+        (->& :content-paper {:margin "18px"
+                             :padding "12px"})
+        (->& :content {:font-family "Orbitron"
+                       :margin "21px"}))))

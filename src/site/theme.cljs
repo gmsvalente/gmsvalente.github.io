@@ -10,6 +10,5 @@
 
 (defn with-theme [theme & children]
   [styles/theme-provider (styles/create-theme @theme)
-   [:<>
-    [css-baseline]
-    children]])
+   [css-baseline]
+   (into [:<>] children)])
