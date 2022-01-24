@@ -1,7 +1,8 @@
 {:source-paths ["src"]
 
  :dependencies [[re-frame "1.3.0-rc2" :exclusions [reagent]]
-                [reagent "1.1.0" :exclusions [cljsjs/react cljsjs/react-dom]]]
+                [reagent "1.1.0" :exclusions [cljsjs/react cljsjs/react-dom]]
+                [arttuka/reagent-material-ui "5.2.4-0"]]
 
  :nrepl {:middleware [refactor-nrepl.middleware/wrap-refactor]}
 
