@@ -6,10 +6,11 @@
             [reagent-mui.material.paper :refer [paper]]))
 
 (defn content-page* [{:keys [class-name]}]
-  [box {:class class-name}
-   [paper {:class (:content-paper classes)}
-    [typography {:class (:content classes)
-                 :variant "h6"}
-     "Hi! My name is Gustavo and this is my Github Pages!"]]])
+  [:div {:class class-name}
+   [box {:class (:content-box classes)}
+    [paper {:class (:content-paper classes)
+            :elevation 7}
+     [typography {:class (:content classes)}
+      "Hi! My name is Gustavo and this is my space on Github!"]]]])
 
 (def content-page (styles/styled content-page* custom-styles))
