@@ -1,7 +1,7 @@
 (ns site.utils)
 
 (defn ->prefix [cls]
-  (let [prefix "smui"]
+  (let [prefix "custom-mui"]
     (str prefix cls)))
 
 (defn ->& [classes res cls style]
