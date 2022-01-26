@@ -4,12 +4,14 @@
             [site.theme :refer [custom-theme with-theme]]
             [site.components.headers :refer [header]]
             [site.components.greetings :refer [greetings]]
+            [site.components.modal-colors :refer [modal-colors]]
             [site.events]
             [re-frame.core :as rf]))
 
 (defn main []
   [with-theme custom-theme
    [header]
+   [modal-colors]
    [greetings]])
 
 (defn ^:dev/after-load init []
