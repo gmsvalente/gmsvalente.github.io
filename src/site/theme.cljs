@@ -1,13 +1,19 @@
 (ns site.theme
-  (:require [reagent-mui.styles :as styles]
+  (:require [re-frame.core :as rf]
+            [reagent-mui.styles :as styles]
             [reagent-mui.material.css-baseline :refer [css-baseline]]
-            [re-frame.core :as rf]
-            [site.events]))
+            [reagent-mui.colors :as colors]
+            [site.subs]))
 
 (def custom-theme
-  (rf/subscribe [:get-theme]))
+  {:palette {:primary colors/red
+             :secondary colors/blue
+             :mode "light"}
+   :typography {:font-family "Orbitron"}})
 
-(defn with-theme [theme & children]
-  [styles/theme-provider (styles/create-theme @theme)
-   [css-baseline]
-   (into [:<>] children)])
+(defn with-theme [& children]
+  (let [theme (rf/subscribe [:get-theme])]
+    [styles/theme-provider (styles/create-theme @theme)
+     [css-baseline]
+     (into [:<>] children)]))
+

@@ -1,14 +1,18 @@
 (ns site.events
   (:require [re-frame.core :as rf]
-            [reagent-mui.colors :as colors]))
+            [site.theme :refer [custom-theme]]))
+
+;;; initial db
 
 (rf/reg-event-db
  :init-db
  (fn []
-   {:theme {:palette {:primary colors/blue
-                      :secondary colors/orange
-                      :mode "light"}}
-    :show-modal-colors? false}))
+   {:theme custom-theme
+    :color-menu {:height 0
+                 :selected "none"}
+    :current-color nil}))
+
+;;; dark mode
 
 (rf/reg-event-fx
  :change-mode
@@ -18,32 +22,38 @@
      {:db (assoc-in db [:theme :palette :mode] new-mode )})))
 
 
+;;; color-picker
+
 (rf/reg-event-fx
- :modal-colors
- (fn [{:keys [db]}]
-   {:db (update db :show-modal-colors? not)}))
+ :toggle-color-menu
+ (fn [{:keys [db]} _]
+   (let [height (get-in db [:color-menu :height])
+         new-height (if (zero? height) 250 0)
+         primary-color (get-in db [:theme :palette :primary])
+         secondary-color (get-in db [:theme :palette :secondary])]
+     {:db (-> db
+              (assoc-in [:color-menu :height] new-height)
+              (assoc :current-color {:primary primary-color
+                                     :secondary secondary-color}))})))
 
 (rf/reg-event-db
- :close-modal
- (fn [db _]
-   (assoc db :show-modal-colors? false)))
+ :select-color
+ (fn [db [_ color]]
+   (-> db
+       (assoc-in [:color-menu :selected] color)
+       (assoc-in [:theme :palette :primary] color))))
 
-(rf/reg-sub
- :show-modal
- (fn [db]
-   (:show-modal-colors? db)))
-
-(rf/reg-sub
- :get-mode
+(rf/reg-event-db
+ :unselect-color
  (fn [db _]
-   (-> db :theme :palette :mode)))
+   (let [pcolor (-> db :current-color :primary)
+         scolor (-> db :current-color :secondary)]
+     (-> db
+         (assoc-in [:theme :palette :primary] pcolor)
+         (assoc-in [:theme :palette :secondary] scolor)))))
 
-(rf/reg-sub
- :get-theme
+(rf/reg-event-db
+ :close-color-picker
  (fn [db _]
-   (:theme db)))
+   (assoc-in db [:color-picker :height] 0)))
 
-(rf/reg-sub
- :get-contrast-text
- (fn [db _]
-   (-> db :theme :palette :primary :contrast-text)))

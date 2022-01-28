@@ -1,18 +1,21 @@
 (ns site.core
   (:require [reagent.dom :as rdom]
+            [re-frame.core :as rf]
             [goog.dom :as gdom]
-            [site.theme :refer [custom-theme with-theme]]
+            [site.theme :refer [with-theme]]
             [site.components.headers :refer [header]]
             [site.components.greetings :refer [greetings]]
-            [site.components.modal-colors :refer [modal-colors]]
             [site.events]
-            [re-frame.core :as rf]))
+            [reagent-mui.material.paper :refer [paper]]))
 
 (defn main []
-  [with-theme custom-theme
+  [with-theme
    [header]
-   [modal-colors]
-   [greetings]])
+   [greetings]
+   [:div
+    [paper {:style {:box-shadow "2px 2px 9px black"
+                    :background-color "cyan"}}
+     [:h1 "asod"]]]])
 
 (defn ^:dev/after-load init []
   (rdom/render [main] (gdom/getElement "root")))
